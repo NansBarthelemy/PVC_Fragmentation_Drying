@@ -182,8 +182,7 @@ IBPFI_plot <- ggplot(IBPFIs, aes(x=" ", y=IBPFI))+
         axis.ticks.x=element_blank())
 IBPFI_plot
 
-Graph1<-plot_grid(UVC_abundance_plot,UVC_size_plot,UVC_Mass_loss_plot,ncol=3, nrow=1,labels = c("A","B","C"))
-Graph1
+
 
 
  
