@@ -133,7 +133,7 @@ bartlett.test(MPs3~Treatment, data=SUN)
 kruskal.test(MPs3 ~ Treatment, data = SUN)
 kruskal(SUN$MPs3, SUN$Treatment, group=TRUE)$groups
 
-SUN_abundance_plot+ geom_signif(
+SUN_abundance_plot<-SUN_abundance_plot+ geom_signif(
   y_position = c(65, 70, 85, 110, 135, 110, 115, 210, 230, 210, 270, 270, 190, 260), xmin = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14), xmax = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14),
   annotation = c("E", "E","E","D","D","D","D","C",'C',"C","AB","ABC","BC","A"), tip_length = 0.001
 )
