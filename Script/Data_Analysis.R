@@ -9,6 +9,7 @@ install.packages("egg")
 install.packages("tidyverse")
 install.packages("viridis")
 install.packages("ggsignif")
+insall.packages("cowplot")
 
 library(ggplot2)
 library(dplyr)
@@ -17,6 +18,7 @@ library(egg)
 library(tidyverse)
 library(viridis)
 library(ggsignif)
+library(cowplot)
 
 # All the dataset used in this Rscript can be found in the "Data" subfolder 
 
@@ -34,6 +36,7 @@ UVC_abundance_plot<-ggplot(data=Abundance, aes(x=Treatment, y=MPs3, fill=Treatme
   theme(plot.title = element_text(hjust = 0.5))
 
 UVC_abundance_plot<-UVC_abundance_plot+scale_fill_manual(values=c("#f2f0f7", "#dadaeb", "#bcbddc", "#9e9ac8", "#807dba","#6a51a3","#54278f","#9ecae1","#6baed6"))
+
 UVC_abundance_plot 
 
 
@@ -111,6 +114,13 @@ UVC_size_plot <- UVC_size_plot + geom_signif(
 
 UVC_size_plot 
 
+################################# Graphical representation
+
+
+UVC<-plot_grid(UVC_abundance_plot,UVC_Mass_loss_plot,UVC_size_plot, labels = c('A', 'B', "C"),ncol=1, nrow=3)
+UVC
+
+
 ################################## UV-C and Sunlight exposure comparison
 
 SUN<-read.csv("SUN_abundance_size.csv", header = T, sep = ";")
@@ -164,25 +174,30 @@ SUN_size_plot <- SUN_size_plot+ geom_signif(
 
 SUN_size_plot
 
+################################# Graphical representation
+
+OUTDOOR<-plot_grid(SUN_abundance_plot,SUN_size_plot, labels = c('A', 'B'),ncol=1, nrow=2)
+OUTDOOR
+
 ################################## Graphical representation of the IBPFI depending on the models output
 
 IBPFIs<-read.csv("IBPFI.csv", header = T, sep = ";")
 
 IBPFI_plot <- ggplot(IBPFIs, aes(x=" ", y=IBPFI))+
-  geom_point(aes(color=model, size=model))+
-  theme_article()+
-  facet_grid(. ~ period)+
+  geom_point(aes(color=model, size=model, shape=model))+
+  facet_grid(.~ period)+
+  theme_bw()+
   ylab("Intermittence Based Plastic Fragmentation Index")+
   xlab("")+
   ylim(415,460)+
   scale_color_manual(values = c("black",viridis(5)))+
   scale_size_manual(values = c(5,3,3,3,3,3))+
+  scale_shape_manual(values=c(15, 4, 17, 18, 9, 16))+
   theme(legend.title=element_blank(),
         axis.text.x=element_blank(),
-        axis.ticks.x=element_blank())
+        axis.ticks.x=element_blank()) 
+
 IBPFI_plot
 
 
 
-
- 
